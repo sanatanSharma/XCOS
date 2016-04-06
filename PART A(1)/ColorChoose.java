@@ -13,14 +13,14 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 public class ColorChoose extends JFrame 
 {
 
-    private JButton jButton1;
-    private JColorChooser jColorChooser1;
-    private PopUp popup;
+    private JButton buttonOK;
+    private JColorChooser colorChooser;
+    private PopUpWindow PopUpWindow;
     private int id;
-    public ColorChoose(PopUp popup, int id) 
+    public ColorChoose(PopUpWindow PopUpWindow, int id) 
     {
     	this.id = id;
-    	this.popup = popup;
+    	this.PopUpWindow = PopUpWindow;
         initComponents();
     }
     
@@ -28,17 +28,18 @@ public class ColorChoose extends JFrame
     private void initComponents() 
     {
 
-        jColorChooser1 = new JColorChooser();
-        jButton1 = new JButton();
+        colorChooser = new JColorChooser();
+        buttonOK = new JButton();
 
+        this.setTitle("Choose Color");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new ActionListener() 
+        buttonOK.setText("OK");
+        buttonOK.addActionListener(new ActionListener() 
         {
             public void actionPerformed( ActionEvent evt) 
             {
-                jButton1ActionPerformed(evt);
+                buttonOKActionPerformed(evt);
             }
         });
 
@@ -48,40 +49,40 @@ public class ColorChoose extends JFrame
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jColorChooser1, GroupLayout.PREFERRED_SIZE, 598, GroupLayout.PREFERRED_SIZE)
+                .addComponent(colorChooser, GroupLayout.PREFERRED_SIZE, 598, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(buttonOK)
                 .addGap(286, 286, 286))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jColorChooser1, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+                .addComponent(colorChooser, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(buttonOK)
                 .addGap(0, 14, Short.MAX_VALUE))
         );
-        AbstractColorChooserPanel[] panels = jColorChooser1.getChooserPanels();
+        AbstractColorChooserPanel[] panels = colorChooser.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels) {
            if(!accp.getDisplayName().equals("Swatches")) {
-              jColorChooser1.removeChooserPanel(accp);
+              colorChooser.removeChooserPanel(accp);
            } 
         }
         pack();
         setLocationRelativeTo(null);
     }                       
 
-    private void jButton1ActionPerformed( ActionEvent evt) 
+    private void buttonOKActionPerformed( ActionEvent evt) 
     {
     	if(id==2)
     	{
-    		popup.setBG(jColorChooser1.getColor());
+    		PopUpWindow.setBG(colorChooser.getColor());
     	}
     	else
     	{
-    		popup.setFG(jColorChooser1.getColor());
+    		PopUpWindow.setFG(colorChooser.getColor());
     	}
         dispose();
     }                                               
